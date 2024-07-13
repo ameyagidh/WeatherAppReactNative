@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
 import CurrentWeather from "./src/components/CurrentWeather";
 import UpcomingWeather from "./src/components/UpcomingWeather";
 import { Feather } from "@expo/vector-icons";
+import OurChildComponent from "./src/components/OurChildComponent";
 
 const App = () => {
   return (

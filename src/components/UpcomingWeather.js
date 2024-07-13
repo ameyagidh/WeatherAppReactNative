@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, View, StyleSheet, Text, FlatList, StatusBar } from "react-native";
+import { SafeAreaView, View, StyleSheet, Text, FlatList, StatusBar, ImageBackground, Image } from "react-native";
 
 const Data = [
   {
@@ -27,7 +27,7 @@ const Item = (props)=>{
         <Text style={styles1.date_style}>{dt_txt}</Text>
         <Text style={styles1.temp}>{max_}</Text>
         <Text style={styles1.temp}>{min_}</Text>
-        <Text>{weather_condition_}</Text>
+        <Text  style={styles1.date_style}>{weather_condition_}</Text>
       </View>
     )
   }
@@ -51,16 +51,15 @@ const UpcomingWeather = () =>{
       );
     return (
         <SafeAreaView style={styles1.container}>
+            <Text style={styles1.item_2}>Upcoming Weather</Text>
+            <ImageBackground source={require("../assets/clouds-3488632_1920.jpg")} style={styles1.image_style}>
             <View style={styles1.item_}>
             <FlatList data={Data} 
             renderItem={renderItem} 
             keyExtractor={(item)=>{item.dt_txt }}
-            ItemSeparatorComponent={() => <View style={{ backgroundColor: "black", height: 2 }} 
-            ListEmptyComponent={<Empty/>
-            }
-            />}
-        />
+            ItemSeparatorComponent={() => <View style={{ backgroundColor: "black", height: 2 }} ListEmptyComponent={<Empty/>}/>}/>
             </View>
+        </ImageBackground>
         </SafeAreaView>
     )
 }
@@ -69,7 +68,7 @@ const styles1 = StyleSheet.create({
     container:{
         flex: 1,
         marginTop: StatusBar.currentHeight || 0,
-        backgroundColor: "blue"
+        backgroundColor: "royalblue"
     },
     item_:{
       padding:20,
@@ -81,14 +80,27 @@ const styles1 = StyleSheet.create({
       borderWidth: 5,
       backgroundColor: "orange"
     },
+    item_2:{
+      flexDirection:"row",
+      justifyContent:"space-around",
+      alignItems:"center",
+      borderWidth: 5,
+      textAlign: 'center',
+      fontSize: 20,
+      backgroundColor:"royalblue"
+    },
     temp: {
       color: "black",
       fontSize: 20,
     },
     date_style: {
-        color:"white",
+        color:"black",
         fontSize: 15,
     },
+    image_style:{
+     flex: 1,
+
+    }
 });
 
 export default UpcomingWeather;
