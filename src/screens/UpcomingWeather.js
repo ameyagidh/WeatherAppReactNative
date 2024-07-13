@@ -1,5 +1,6 @@
 import React from "react";
 import { SafeAreaView, View, StyleSheet, Text, FlatList, StatusBar, ImageBackground, Image } from "react-native";
+import ListItem from "./ListItem";
 
 const Data = [
   {
@@ -19,19 +20,6 @@ const Data = [
   },
 ];
 
-const Item = (props)=>{
-    const {dt_txt, min_, max_, weather_condition_ } = props
-    return (
-      <View>
-        {/* <Feather name={'sun'} size={50} color={'white '}/> */}
-        <Text style={styles1.date_style}>{dt_txt}</Text>
-        <Text style={styles1.temp}>{max_}</Text>
-        <Text style={styles1.temp}>{min_}</Text>
-        <Text  style={styles1.date_style}>{weather_condition_}</Text>
-      </View>
-    )
-  }
-
   const Empty = ()=>{
     return (
       <View>
@@ -40,20 +28,21 @@ const Item = (props)=>{
     )
   }
 
-const UpcomingWeather = () =>{
+const UpcomingWeather = (styles1) =>{
     const renderItem = ({ item }) => (
-        <Item
+        <ListItem
           dt_txt={item.dt_txt}
           min_={item.main.temp_min}
           max_={item.main.temp_max}
           weather_condition_={item.weather[0].main}
         />
       );
+    const {container, image_style, item_2, item_} = styles1
     return (
-        <SafeAreaView style={styles1.container}>
-            <Text style={styles1.item_2}>Upcoming Weather</Text>
-            <ImageBackground source={require("../assets/clouds-3488632_1920.jpg")} style={styles1.image_style}>
-            <View style={styles1.item_}>
+        <SafeAreaView style={container}>
+            <Text style={item_2}>Upcoming Weather</Text>
+            <ImageBackground source={require("../assets/clouds-3488632_1920.jpg")} style={image_style}>
+            <View style={item_}>
             <FlatList data={Data} 
             renderItem={renderItem} 
             keyExtractor={(item)=>{item.dt_txt }}
@@ -64,7 +53,7 @@ const UpcomingWeather = () =>{
     )
 }
 
-const styles1 = StyleSheet.create({
+const styles2 = StyleSheet.create({
     container:{
         flex: 1,
         marginTop: StatusBar.currentHeight || 0,
