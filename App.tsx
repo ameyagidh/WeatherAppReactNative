@@ -1,14 +1,24 @@
 import React from "react";
+import { View, Text, StyleSheet, FlatList, SafeAreaView } from "react-native";
+import CurrentWeather from "./src/components/CurrentWeather";
+import UpcomingWeather from "./src/components/UpcomingWeather";
+import { Feather } from "@expo/vector-icons";
 
-import { Text, View, SafeAreaView } from "react-native";
-
-const App = () =>{
+const App = () => {
   return (
-    <SafeAreaView>
-      <View>
-      <Text>Current Weather</Text>
+    <View style={styles.container}> 
+    <CurrentWeather/>
+    <UpcomingWeather/>
     </View>
-    </SafeAreaView>
   )
-}
+    
+};
+
+const styles = StyleSheet.create({
+  container:{
+    flex: 1,
+  },
+
+})
+
 export default App;
