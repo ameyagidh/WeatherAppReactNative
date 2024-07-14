@@ -1,66 +1,27 @@
+// App.js
 import React from "react";
-import { View, Text, StyleSheet, FlatList, SafeAreaView, StatusBar } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CurrentWeather from "./src/screens/CurrentWeather";
 import UpcomingWeather from "./src/screens/UpcomingWeather";
-import { Feather } from "@expo/vector-icons";
-import OurChildComponent from "./src/screens/OurChildComponent"; 
 import City from "./src/screens/City";
+import GestureControlledScreen from "./src/screens/GestureControlledScreen";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
-    <View style={styles.container}> 
-    <CurrentWeather style={styles1} />
-    <UpcomingWeather style={styles1}/>
-    <City/>
-    </View>
-  )
-     
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="CurrentWeather">
+          <Stack.Screen name="CurrentWeather" component={CurrentWeather} />
+          <Stack.Screen name="UpcomingWeather" component={UpcomingWeather} />
+          <Stack.Screen name="City" component={City} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
+  );
 };
-
-const styles = StyleSheet.create({
-  container:{
-    flex: 1,
-  },
-
-}); 
-
-const styles1 = StyleSheet.create({
-  container:{
-      flex: 1,
-      marginTop: StatusBar.currentHeight || 0,
-      backgroundColor: "royalblue"
-  },
-  item_:{
-    padding:20,
-    marginVertical:8,
-    marginHorizontal: 16,
-    flexDirection:"row",
-    justifyContent:"space-around",
-    alignItems:"center",
-    borderWidth: 5,
-    backgroundColor: "orange"
-  },
-  item_2:{
-    flexDirection:"row",
-    justifyContent:"space-around",
-    alignItems:"center",
-    borderWidth: 5,
-    textAlign: 'center',
-    fontSize: 20,
-    backgroundColor:"royalblue"
-  },
-  temp: {
-    color: "black",
-    fontSize: 15,
-  },
-  date_style: {
-      color:"black",
-      fontSize: 15,
-  },
-  image_style:{
-   flex: 1,
-
-  }
-});
 
 export default App;

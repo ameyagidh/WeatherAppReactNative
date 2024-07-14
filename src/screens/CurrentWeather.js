@@ -1,69 +1,133 @@
 import React from "react";
-import { Text, View, SafeAreaView, StyleSheet } from "react-native";
+import { Text, View, SafeAreaView, StyleSheet, Button } from "react-native";
+import RowText from "./RowText";
 
 // Sample data
-let temp = 10;
-let temp_current = 8;
-let high = 12;
-let low = 6;
+const temp = 10;
+const temp_current = 8;
+const high = 12;
+const low = 6;
 
-const CurrentWeather = () => {
+const CurrentWeather = ({ navigation }) => {
+  const {
+    wrapperStyle,
+    containerStyle,
+    tempStyle,
+    feelStyle,
+    highLowStyle,
+    highLowWrapperStyle,
+    messageStyle,
+    bodyWrapperStyle,
+    buttonRowStyle,
+    buttonContainerStyle,
+    buttonStyle
+  } = styles;
+
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <View style={styles.container}>
-        <Text>Current Weather</Text>
-        <Text style={styles.temp}>{temp_current}°</Text>
-        <Text style={styles.feel}>Feels Like {temp}°</Text>
-        <View style={styles.highLowWrapper}>
-          <Text style={styles.highLow}>High: {high}°</Text>
-          <Text style={styles.highLow}>Low: {low}°</Text>
-        </View>
+    <SafeAreaView style={wrapperStyle}>
+      <View style={containerStyle}>
+        <Text style={tempStyle}>{temp_current}°</Text>
+        <Text style={feelStyle}>Feels Like {temp}°</Text>
       </View>
-      <View style={styles.bodyWrapper}>
-        <Text style={styles.description}>It's Sunny</Text>
-        <Text style={styles.message}>It's a perfect weather</Text>
+      <RowText
+        message1={`High: ${high}`}
+        message2={`Low: ${low}`}
+        message1Style={highLowStyle}
+        message2Style={highLowStyle}
+        containerStyles={highLowWrapperStyle}
+      />
+      <RowText
+        message1={"It's Sunny"}
+        message2={"It's a perfect weather"}
+        message1Style={messageStyle}
+        message2Style={messageStyle}
+        containerStyles={bodyWrapperStyle}
+      />
+      <View style={buttonRowStyle}>
+        <View style={buttonContainerStyle}>
+          <Button 
+            title="Go to Upcoming Weather"
+            onPress={() => navigation.navigate('UpcomingWeather')}
+            color={buttonStyle.color}
+          />
+        </View>
+        <View style={buttonContainerStyle}>
+          <Button 
+            title="Go to City"
+            onPress={() => navigation.navigate('City')}
+            color={buttonStyle.color}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
+  wrapperStyle: {
     flex: 1,
     backgroundColor: "orange",
+    justifyContent: "space-between",
+    paddingVertical: 50,
   },
-  container: {
+  containerStyle: {
     alignItems: "center",
-    flex: 1,
     justifyContent: "center",
   },
-  temp: {
+  tempStyle: {
     fontSize: 50,
     color: "black",
+    fontWeight: "bold",
+    textShadowRadius: 10,
   },
-  feel: {
+  feelStyle: {
     fontSize: 28,
     color: "black",
+    fontWeight: "bold",
+    textShadowRadius: 10,
   },
-  highLowWrapper: {
+  highLowWrapperStyle: {
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 10,
   },
-  highLow: {
+  highLowStyle: {
+    padding: 20,
     color: "black",
     fontSize: 20,
+    fontWeight: "bold",
     marginHorizontal: 10,
   },
-  bodyWrapper: {
-    justifyContent: "flex-end",
+  bodyWrapperStyle: {
     alignItems: "flex-start",
     paddingLeft: 25,
     marginBottom: 40,
   },
-  description: {
+  messageStyle: {
     fontSize: 23,
+    fontWeight: "bold",
+    color: "black",
+    textShadowRadius: 5,
   },
-  message: {
-    fontSize: 23,
+  buttonRowStyle: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10,
+    backgroundColor: "rgba(255, 165, 0, 0.8)",
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  buttonContainerStyle: {
+    flex: 1,
+    marginHorizontal: 5,
+  },
+  buttonStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textShadowColor: "rgba(0, 0, 0, 0.75)",
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 5,
   },
 });
 
