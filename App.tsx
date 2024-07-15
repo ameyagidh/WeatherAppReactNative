@@ -9,18 +9,17 @@ import GestureControlledScreen from "./src/screens/GestureControlledScreen";
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ActivityIndicator, StyleSheet, View, PermissionsAndroid, Platform } from "react-native";
 import Geolocation from '@react-native-community/geolocation';
+import {API_KEY} from "@env";
 
 const Stack = createNativeStackNavigator();
 
 // api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
-// c939f1ed706d7d29a153f7a50bc8b1ff
 
 
 const App = () => {
   const [loading, setLoading] = useState(false);
   const [location, setLocation] = useState(null);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     const requestLocationPermission = async () => {
       if (Platform.OS === 'android') {
