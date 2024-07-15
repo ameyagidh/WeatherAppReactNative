@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, View, SafeAreaView, StyleSheet, Button } from "react-native";
 import RowText from "./RowText";
+import { WeatherType } from "../utilities/WeatherType";
 
 // Sample data
 const temp = 10;
@@ -38,7 +39,7 @@ const CurrentWeather = ({ navigation }) => {
       />
       <RowText
         message1={"It's Sunny"}
-        message2={"It's a perfect weather"}
+        message2={WeatherType["Clear"].message}
         message1Style={messageStyle}
         message2Style={messageStyle}
         containerStyles={bodyWrapperStyle}

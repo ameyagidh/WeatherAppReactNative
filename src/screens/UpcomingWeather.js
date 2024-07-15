@@ -9,7 +9,7 @@ const Data = [
     weather: [{ main: "clear" }],
   },
   {
-    dt_txt: "2024-03-08 02:00:00",
+    dt_txt: "2024-03-08 02:00:00", 
     main: { temp_max: 9.5, temp_min: 5.55 },
     weather: [{ main: "sunny" }],
   },
