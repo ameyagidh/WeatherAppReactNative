@@ -9,7 +9,7 @@ const temp_current = 8;
 const high = 12;
 const low = 6;
 
-const CurrentWeather = ({ navigation }) => {
+const CurrentWeather = ({ navigation}) => {
   const {
     wrapperStyle,
     containerStyle,
@@ -23,6 +23,9 @@ const CurrentWeather = ({ navigation }) => {
     buttonContainerStyle,
     buttonStyle
   } = styles;
+
+  // const {main:{temp, feels_like, temp_max, temp_min}, weather} = weatherData;
+  // const weather_condition_ = weather[0].main;
 
   return (
     <SafeAreaView style={wrapperStyle}>

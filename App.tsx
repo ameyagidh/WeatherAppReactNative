@@ -10,16 +10,35 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ActivityIndicator, StyleSheet, View, PermissionsAndroid, Platform } from "react-native";
 import Geolocation from '@react-native-community/geolocation';
 import {API_KEY} from "@env";
-
 const Stack = createNativeStackNavigator();
 
 // api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}
 
 
 const App = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [location, setLocation] = useState(null);
-  const [error, setError] = useState(null);
+  const [err, setError] = useState(null);
+  const [weather, setWeather] = useState([]);
+  const [lat, setlat] = useState([]);
+  const [lng, setlng] = useState([]);
+
+  const fetchWeatherData = async()=>{
+    try{
+      console.log(`latitude is ${lat}, longtitude is ${lng}`);
+      const res = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=0f41864152519b8d215c39cb34e144ac`);
+      const data = await res.json();
+      console.log(res);
+      setWeather(data);
+    }
+    catch(error){
+      setError("Could not fetch Weather");
+    }
+    finally{
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
     const requestLocationPermission = async () => {
       if (Platform.OS === 'android') {
@@ -54,7 +73,13 @@ const App = () => {
       Geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setLocation({ latitude, longitude });
+          setlat(latitude);
+          setlng(longitude);
+          // console.log("latitude is ");
+          // console.log(latitude);
+          // console.log("longitude is ");
+          // console.log(longitude);
+          fetchWeatherData();
           setLoading(false);
         },
         (error) => {
@@ -66,7 +91,7 @@ const App = () => {
     };
 
     requestLocationPermission();
-  }, []);
+  }, [lat, lng]);
 
   if (loading) {
     return (
@@ -76,9 +101,16 @@ const App = () => {
     );
   }
 
-  if (location) {
-    console.log(location);
+  // if (location) {
+  //   console.log("Location is");
+  //   console.log(location);
+  // }
+
+  if(weather){
+    console.log("Weather is");
+    console.log(weather);
   }
+ 
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
